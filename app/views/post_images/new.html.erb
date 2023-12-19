@@ -1,0 +1,15 @@
+<h1>画像投稿フォーム</h1>
+<!--post_path（リスト）を持ってくる-->
+<%= form_with model: @post_image do |f| %>
+  <h4>画像</h4>
+  <!--画像投稿機能-->
+  <%= f.file_field :image, accetp: "image/*" %>
+  <h4>ショップ名</h4>
+  <!--title投稿機能-->
+  <%= f.text_field :shop_name %>
+  <h4>説明</h4>
+  <!--投稿の説明機能-->
+  <%= f.text_area :caption %>
+  <!--投稿のボタンの作成-->
+  <%= f.submit "投稿" %>
+<% end %>

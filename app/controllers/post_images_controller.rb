@@ -1,7 +1,7 @@
 class PostImagesController < ApplicationController
 
   def new
-
+    # データを新しく登録する
     @post_image = PostImage.new
   end
 
@@ -18,9 +18,19 @@ class PostImagesController < ApplicationController
   end
 
   def index
+    #データを受け取る（全て）
+    @post_images = PostImage.all
   end
 
   def show
+    # 詳細画面
+    @post_image = PostImage.find(params[:id])
+  end
+
+  def destroy
+    post_image = PostImage.find(params[:id])
+    post_image.destroy
+    redirect_to post_image_path
   end
 
     # 投稿データのストロングパラメータ

@@ -28,8 +28,11 @@ class PostImagesController < ApplicationController
   end
 
   def destroy
+    #データを受け取る（一件）
     post_image = PostImage.find(params[:id])
+    #データを削除
     post_image.destroy
+    # showへリダイレクト
     redirect_to post_image_path
   end
 

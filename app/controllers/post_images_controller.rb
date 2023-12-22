@@ -25,6 +25,7 @@ class PostImagesController < ApplicationController
   def show
     # 詳細画面
     @post_image = PostImage.find(params[:id])
+    @post_comment = PostComment.new
   end
 
   def destroy

@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   get "homes/about" => "homes#about" ,as: "about"
   # ルーティングを一括して自動生成してくれる(post_image)
   resources :post_images, only: [:new, :create, :index, :show, :destroy] do
+  resource :favorite, only: [:create, :destroy]
   # ルーティングを一括して自動生成してくれる(post_comments)
-  resources :post_comments, only: [:create]
+  resources :post_comments, only: [:create, :destroy]
   end
   # ルーティングを一括して自動生成してくれる(users)
   resources :users, only: [:show, :edit, :update]

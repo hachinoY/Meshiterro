@@ -18,8 +18,8 @@ class PostImagesController < ApplicationController
   end
 
   def index
-    #データを受け取る（全て）
-    @post_images = PostImage.all
+    #データを受け取る（ページごと）
+    @post_images = PostImage.page(params[:page])
   end
 
   def show
@@ -36,7 +36,7 @@ class PostImagesController < ApplicationController
     # showへリダイレクト
     redirect_to post_image_path
   end
-  
+
   def create
     @post_image = PostImage.new(post_image_params)
     @post_image.user_id = current_user.id

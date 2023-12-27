@@ -1,21 +1,19 @@
 class UsersController < ApplicationController
+  # before_actionでログインユーザーを確かめる、onlyでedit,updateでそれを実行する
+  before_action :is_matching_login_user, only: [:edit, :update]
 
   def show
     @user = User.find(params[:id])
-    @post_images = @user.post_images
+    @post_images = @user.post_images.page(params[:page])
   end
 
   def edit
-    #編集画面へ移動
-    @user = User.find(params[:id])
+  @user = User.find(params[:id])
   end
 
   def update
-    #データを受け取る（一件）
     @user = User.find(params[:id])
-    # 投稿一覧画面へリダイレクト
     @user.update(user_params)
-    #show画面へリダイレクト
     redirect_to user_path(@user.id)
   end
 
@@ -24,4 +22,14 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :profile_image)
   end
+
+  def is_matching_login_user
+    #データを受け取る（一件）
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+    # show画面に移動
+      redirect_to post_images_path
+    end
+  end
+
 end
